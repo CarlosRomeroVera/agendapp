@@ -7,7 +7,7 @@
     <feature name="Geolocation">
         <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
     </feature>
-    <name>Agenda app</name>
+    <name>Relaciones Públicas</name>
     <description>
         A basic Framework7 template for PhoneGap.
     </description>

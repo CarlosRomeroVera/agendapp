@@ -29,7 +29,8 @@ myApp.onPageInit('DetallesUser', function (page) {
     		            }
     		            else{
     		                myApp.alert('El usuario no tiene asignado un asiento', '¡Atención!');
-    		                $('#showdata').html('Asiento: ' + 'El usuario no tiene asignado un asiento');
+    		                $('#showdata').html('Asiento: ' + 'El usuario no tiene asignado un asiento' +
+                                                '<br><a href="#" data-popup=".popup-about" class="open-popup">Asignar asiento</a>');
                             $('#showExtra').html('Nombre: ' + persona.personaNombreCompleto +
                                                      '<br>Estado civil: ' + persona.estadoCivilNombre +
                                                      '<br>Cargo: ' + persona.cargoNombre +
