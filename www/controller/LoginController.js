@@ -39,6 +39,21 @@ function cambiarPage(link, tipo) {
 }
 
 $(function() {
+    var usuario = localStorage.getItem('User');
+
+    if (usuario!=null) {
+        //window.user_id_global = localStorage.getItem('id');
+        //window.user_usuario_global = localStorage.getItem('User');
+        window.user_id = localStorage.getItem('idUser');
+        window.user_usuario = localStorage.getItem('User');
+        window.evento_id = localStorage.getItem('Evento');
+        //$.mobile.changePage( "../Index/Index.html", { transition: "flip", reverse: "true", changeHash: "false" });
+        //cleanUp('IndexIndex');
+        mainView.router.loadPage('../User/Index.html');
+
+        //window.location.href = "../Index/Index.html";
+    }
+
     $.ajax({
         type: 'POST', 
         url:  window.server + 'obtener_eventos.php',
@@ -91,12 +106,13 @@ $$('#IniciarSesion').on('click', function(){
                     window.user_id = user.id;
                     window.user_usuario = user.username;
                     window.user_organismo = user.organismo_id;
-                    datos = user.id+" "+user.username;
+                    datos = user.id+" "+user.username+" "+window.evento_id;
                 });
                 
                 var result = datos.split(" ");
                 localStorage.setItem('idUser', result[0]);
                 localStorage.setItem('User', result[1]);
+                localStorage.setItem('Evento', result[2]);
                 mainView.router.loadPage('../User/Index.html');
             }
             else{

@@ -12,7 +12,19 @@ if ($result) {
       $persona_evento_id = $obj->id;
    }
    if (empty($var)) {
-   		echo "Error1";
+   		//echo "Error1";
+   		$sql = "SELECT * FROM vpersonaevento where id = '".$id."'";
+		$result = mysqli_query($con, $sql);
+		if ($result) {
+		   $var = [];
+		   while($obj = mysqli_fetch_object($result)) {
+		      $var[] = $obj;
+		      $obj->error1 = true;
+		   }
+		   echo json_encode($var);
+		}else{
+		   echo "Error";
+		}
    }else{
    		//echo '{"funcionario":'.json_encode($var).'}';
    		$sql = "SELECT * FROM ub_sillas where persona_evento_id = '".$persona_evento_id."'";
@@ -25,7 +37,19 @@ if ($result) {
 		      $fila = $obj->ub_fila_id;
 		   }
 		   if (empty($var)) {
-		   		echo "Error2";
+		   		$sql = "SELECT * FROM vpersonaevento where id = '".$id."'";
+				$result = mysqli_query($con, $sql);
+				if ($result) {
+				   $var = [];
+				   while($obj = mysqli_fetch_object($result)) {
+				      $var[] = $obj;
+				      $obj->error1 = false;
+				      $obj->error2 = true;
+				   }
+				   echo json_encode($var);
+				}else{
+				   echo "Error";
+				}
 		   }else{
 		   		$sql = "SELECT * FROM ub_columnas where id = '".$columna."'";
 		   		$result = mysqli_query($con, $sql);
@@ -34,6 +58,7 @@ if ($result) {
 				   while($obj = mysqli_fetch_object($result)) {
 				      $var[] = $obj;
 				      $columna = $obj->name;
+				      
 				   }
 				}else{
 				   echo "Error";
@@ -50,7 +75,20 @@ if ($result) {
 				}else{
 				   echo "Error";
 				}
-				echo $columna.$fila;
+				$sql = "SELECT * FROM vpersonaevento where id = '".$id."'";
+				$result = mysqli_query($con, $sql);
+				if ($result) {
+				   $var = [];
+				   while($obj = mysqli_fetch_object($result)) {
+				      $var[] = $obj;
+				      $obj->asiento = $columna.$fila;
+				      $obj->error1 = false;
+				      $obj->error2 = false;
+				   }
+				   echo json_encode($var);
+				}else{
+				   echo "Error";
+				}
 		   }
 		}else{
 		   echo "Error";
