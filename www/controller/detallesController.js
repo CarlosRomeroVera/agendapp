@@ -103,7 +103,6 @@ myApp.onPageInit('DetallesUser', function (page) {
             success: function(data){
                 
                 if(data == 'ok'){
-                    $( ".close-popup" ).click();
                     mainView.router.loadPage('../User/Index.html');
                     myApp.alert('Actualizado', '¡Atención!');
                 }
