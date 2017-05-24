@@ -37,6 +37,29 @@ myApp.onPageInit('DetallesUser', function (page) {
                                                      '<br>Organismo: ' + persona.organismoNombre +
                                                      '<br>Partido: ' + persona.siglaPartido +
                                                      '<br>Tipo invitado: ' + persona.tipoPersona);
+                            $.ajax({
+                                type: 'POST', 
+                                url:  window.server + 'obtiene_asientos_libres.php',
+                                data:   ({
+                                            eventoId: window.evento_id,
+                                        }),
+                                cache: false,
+                                dataType: 'text',
+                                success: function(data){
+                                    
+                                    if(data != 'error'){
+                                        var obj = $.parseJSON(data);
+                                        var html = '';
+                                        $.each(obj, function(i,asiento){
+                                            html = html + '<option value="'+asiento.nombreSilla+'">'+asiento.nombreSilla+'</option>'
+                                        });
+                                        $("#asientoslibres").html(html);
+                                    }
+                                    else{
+                                        myApp.alert('Verifique conexión e intente de nuevo', '¡Atención!');
+                                    }
+                                }
+                            });//fin de ajax
     		                
     		            }
     	            }
@@ -64,4 +87,33 @@ myApp.onPageInit('DetallesUser', function (page) {
             });
         }
     });//fin de ajax
+
+    $$('#asignarAsiento').on('click', function(){
+        
+        $.ajax({
+            type: 'POST', 
+            url:  window.server + 'asignar_asiento.php',
+            data:   ({
+                        personaId: window.resultado_id,
+                        sillaNombre: $('#asientoslibres').val(),
+                        eventoId: window.evento_id
+                    }),
+            cache: false,
+            dataType: 'text',
+            success: function(data){
+                
+                if(data == 'ok'){
+                    myApp.alert('Actualizado', '¡Atención!');
+                    mainView.router.loadPage('../User/Index.html');
+                }
+                else{
+                    myApp.alert(data, '¡Atención!');
+                }
+            }
+        });//fin de ajax
+        
+        $('#contrasenia').val(''); 
+        //var formData = myApp.formToData('#LoginForm');
+        //alert(JSON.stringify(formData));
+    });  
 });
