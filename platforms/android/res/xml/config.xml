@@ -9,9 +9,9 @@
     </feature>
     <name>Relaciones Públicas</name>
     <description>
-        A basic Framework7 template for PhoneGap.
+        Buscador simple con soporte de rfid
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
+    <author email="romeroveracarlos@gmail.com" href="http://cordova.io">
         Apache Cordova Team
     </author>
     <content src="index.html" />
