@@ -8,7 +8,8 @@ myApp.onPageInit('PrincipalUser', function (page) {
 		{return false;} 
 		if((e.keyCode == 116 || e.keyCode == 82) && e.ctrlKey==true)
 		{return false;} 
-	    
+	    if(e.keyCode == 13)
+		{return false;} 
 	}
 	$("#buscar").on('keyup', function(){
         var value = $(this).val();
