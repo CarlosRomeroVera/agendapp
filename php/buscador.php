@@ -10,7 +10,20 @@ if ($result) {
       $var[] = $obj;
    }
 
-   echo '{"funcionario":'.json_encode($var).'}';
+   if (empty($var)) {
+   	$sql = "SELECT * FROM vpersonaevento where personasRfid LIKE '%".$match."%'";
+	$result = mysqli_query($con, $sql);
+	if ($result) {
+	   $var = [];
+	   while($obj = mysqli_fetch_object($result)) {
+	      $var[] = $obj;
+	   }
+	}
+	echo '{"funcionario":'.json_encode($var).'}';
+   }else{
+   		echo '{"funcionario":'.json_encode($var).'}';
+   }
+   
 
 }else{
    echo "Error";
