@@ -1,4 +1,5 @@
 myApp.onPageInit('PrincipalUser', function (page) {
+    document.getElementById('buscar').focus();
 	javascript:window.history.forward(1);
 	document.onkeydown = function(e){
   
@@ -25,10 +26,11 @@ myApp.onPageInit('PrincipalUser', function (page) {
 	            
 	            if(data != 'error'){
 	                var obj = $.parseJSON(data);
+	                //alert(obj.funcionario.length);
 	        		var html = '';
 	                $.each(obj.funcionario, function(i,funcionario){
 	                    html = html + "<li>";
-						    html = html + "<a href='../User/detail.html' onclick='asignaId("+'"'+funcionario.id+'"'+");' class='item-link item-content'>";
+						    html = html + "<a href='../User/detail.html' onclick='asignaId("+'"'+funcionario.id+'"'+");' class='item-link item-content' id='cl'> ";
 						    html = html + "<div class='item-inner'>";
 							    html = html + "<div class='item-title-row'>";
 								    html = html + "<div class='item-title'>" + funcionario.personaNombreCompleto + "</div>";
@@ -39,6 +41,13 @@ myApp.onPageInit('PrincipalUser', function (page) {
 					    html = html + "</li>";
 	                });
 	                $("#results").html(html);
+	                if (obj.funcionario.length == 1) {
+	                	$.each(obj.funcionario, function(i,funcionario){
+							asignaId(funcionario.id);
+	                	});
+	        			
+	        			mainView.router.loadPage('../User/detail.html');
+	        		}
 	            }
 	            else{
 	                myApp.alert('Verifique conexión e intente de nuevo', '¡Atención!');
