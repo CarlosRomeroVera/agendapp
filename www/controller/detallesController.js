@@ -103,8 +103,10 @@ myApp.onPageInit('DetallesUser', function (page) {
             success: function(data){
                 
                 if(data == 'ok'){
-                    mainView.router.loadPage('../User/Index.html');
+                    myApp.closeModal('.popup-about');
                     myApp.alert('Actualizado', '¡Atención!');
+                    mainView.router.loadPage('../User/Index.html');
+                    
                 }
                 else{
                     myApp.alert(data, '¡Atención!');
