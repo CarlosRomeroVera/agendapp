@@ -104,8 +104,9 @@ myApp.onPageInit('DetallesUser', function (page) {
                 
                 if(data == 'ok'){
                     myApp.closeModal('.popup-about');
-                    myApp.alert('Actualizado', '¡Atención!');
-                    mainView.router.loadPage('../User/Index.html');
+                    //myApp.alert('Actualizado', '¡Atención!');
+                    //mainView.router.loadPage('../User/Index.html');
+                    mainView.router.back();
                     
                 }
                 else{
