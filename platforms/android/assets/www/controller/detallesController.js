@@ -1,4 +1,5 @@
 myApp.onPageInit('DetallesUser', function (page) {
+    cont = 0;
 	//alert(window.resultado_id);
 	$.ajax({
         type: 'POST', 
@@ -104,8 +105,13 @@ myApp.onPageInit('DetallesUser', function (page) {
                 
                 if(data == 'ok'){
                     myApp.closeModal('.popup-about');
-                    myApp.alert('Actualizado', '¡Atención!');
-                    mainView.router.loadPage('../User/Index.html');
+                    if (cont == 0) {
+                        myApp.alert('Actualizado', '¡Atención!');
+                        cont++;
+                    }
+                    //
+                    //mainView.router.loadPage('../User/Index.html');
+                    mainView.router.back();
                     
                 }
                 else{
